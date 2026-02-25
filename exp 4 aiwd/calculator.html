@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter - No API Required</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    <style>
+        /* CSS STYLES */
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        body {
+            background-color: #9873fe;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .wrapper {
+            width: 90%;
+            max-width: 25em;
+            background-color: #ffffff;
+            padding: 2.5em;
+            border-radius: 1em;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .app-details {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin-bottom: 1.5em;
+        }
+        .app-title {
+            font-size: 1.5em;
+            text-transform: uppercase;
+            color: #02002c;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5em;
+            color: #02002c;
+        }
+        input#amount {
+            font-weight: 400;
+            font-size: 1.2em;
+            display: block;
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid #02002c;
+            color: #7a789d;
+            margin-bottom: 1.5em;
+            padding: 0.5em;
+            outline: none;
+        }
+        input#amount:focus {
+            color: #9873fe;
+            border-color: #9873fe;
+        }
+        .dropdowns {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1em;
+        }
+        select {
+            width: 100%;
+            padding: 0.8em;
+            font-size: 1em;
+            border-radius: 0.4em;
+            background-color: #9873fe;
+            color: #ffffff;
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+        select option {
+            background-color: #ffffff;
+            color: #02002c;
+        }
+        button {
+            font-size: 1.1em;
+            width: 100%;
+            background-color: #02002c;
+            padding: 1em 0;
+            margin-top: 1.5em;
+            border-radius: 0.5em;
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #7a54e3;
+        }
+        #result {
+            font-size: 1.2em;
+            text-align: center;
+            margin-top: 1.5em;
+            color: #02002c;
+            background-color: #e5dbff;
+            padding: 1em;
+            border-radius: 0.5em;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="app-details">
+        <!-- SVG Icon -->
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="#9873fe" xmlns="http://www.w3.org">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.31-8.86c-1.77-.45-2.34-.94-2.34-1.67 0-.84.79-1.39 2.1-1.39 1.31 0 1.79.59 1.84 1.44h1.66c-.05-1.44-.9-2.51-2.33-2.83V5h-2v1.64c-1.47.31-2.58 1.25-2.58 2.7 0 1.78 1.48 2.68 3.63 3.2 2.05.5 2.5 1.13 2.5 1.95 0 .76-.66 1.46-2.23 1.46-1.73 0-2.31-.77-2.4-1.68H8.76c.09 1.78 1.26 2.76 2.67 3.09V19h2v-1.66c1.55-.26 2.74-1.18 2.74-2.73 0-2.09-1.73-2.88-4.22-3.47z""")/>>
+        </svg>
+        <h1 class="app-title">Currency Converter</h1>
+    </div>
+
+    <label for="amount">Amount:</label>
+    <!-- oninput updates the result as you type -->
+    <input type="number" id="amount" value="100" oninput="convert()">
+
+    <div class="dropdowns">
+        <!-- onchange event triggers conversion instantly when selection changes -->
+        <select id="fromCurrency" onchange="convert()">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="INR">INR</option>
+        </select>
+        <select id="toCurrency" onchange="convert()">
+            <option value="INR" selected>INR</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+        </select>
+    </div>
+
+    <button onclick="convert()">Convert</button>
+    <p id="result"></p>
+</div>
+
+<script>
+    // Static Exchange Rates (Relative to 1 USD)
+    const rates = {
+        "USD": 1,
+        "EUR": 0.92,
+        "GBP": 0.79,
+        "INR": 83.00
+    };
+
+    function convert() {
+        // Get values from inputs
+        const amount = document.getElementById("amount").value;
+        const from = document.getElementById("fromCurrency").value;
+        const to = document.getElementById("toCurrency").value;
+        const display = document.getElementById("result");
+
+        if (amount === "" || amount <= 0) {
+            display.innerHTML = "Please enter a valid amount";
+            return;
+        }
+
+        // Logic: (Amount / Rate of base currency) * Rate of target currency
+        const converted = (amount / rates[from]) * rates[to];
+        
+        // Display the result
+        display.innerHTML = `${amount} ${from} = ${converted.toFixed(2)} ${to}`;
+    }
+
+    // Call convert once on load to show initial 100 USD to INR
+    window.onload = convert;
+</script>
+
+</body>
+</html>
+
+
+
+
