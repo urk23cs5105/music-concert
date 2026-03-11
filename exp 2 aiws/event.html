@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EchoBeats Live Concert</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>EchoBeats Live 2026</h1>
+            <p>Feel the Music • Live the Moment</p>
+        </div>
+    </section>
+
+    <!-- VIDEO SECTION -->
+    <section class="card">
+        <h2>Official Promo Video</h2>
+        <video controls>
+            <source src="videoplayback.mp4" type="video/mp4">
+            Your browser does not support video.
+        </video>
+    </section>
+
+    <!-- AUDIO SECTION -->
+    <section class="card">
+        <h2>Preview the Sound</h2>
+        <audio controls>
+            <source src="preview.mp3" type="audio/mpeg">
+            Your browser does not support audio.
+        </audio>
+    </section>
+
+    <!-- REGISTRATION FORM -->
+    <section class="form-card">
+        <h2>Concert Registration</h2>
+
+        <form>
+            <input type="text" placeholder="Full Name" required>
+
+            <input type="email" placeholder="Email Address" required>
+
+            <input type="date" required>
+
+            <label>Ticket Type</label>
+            <div class="options">
+                <input type="radio" name="ticket" required> Regular
+                <input type="radio" name="ticket"> VIP
+            </div>
+
+            <select required>
+                <option value="">Select Music Genre</option>
+                <option>Rock</option>
+                <option>Pop</option>
+                <option>EDM</option>
+                <option>Jazz</option>
+            </select>
+
+            <textarea rows="4" placeholder="Any special request?"></textarea>
+
+            <input type="file" accept=".jpg,.png,.pdf">
+
+            <button type="submit">Register Now</button>
+        </form>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 EchoBeats Concert | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>
+
