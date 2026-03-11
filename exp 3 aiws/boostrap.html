@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Music Concert 2024</title>
+    
+    <!-- TC01: Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net" rel="stylesheet">
+    
+    <style>
+        .hero-section { background: #111; color: white; padding: 60px 0; }
+        .media-card { border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: 0.3s; }
+        .media-card:hover { transform: translateY(-5px); }
+    </style>
+</head>
+<body>
+
+    <!-- TC04: Responsive Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">ROCK-FEST 2024</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#concertNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="concertNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#media">Media</a></li>
+                    <li class="nav-item"><a class="btn btn-danger ms-lg-3" href="#">Buy Tickets</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-3 fw-bold">Feel the Rhythm</h1>
+            <p class="lead mb-4">Experience the biggest music event of the year live in London.</p>
+            <!-- TC07: Styled Buttons -->
+            <a href="#media" class="btn btn-outline-light btn-lg">View Media</a>
+        </div>
+    </header>
+
+    <!-- TC03: Grid System (Main Content) -->
+    <main class="container my-5" id="gallery">
+        <div class="row g-4 align-items-center">
+            
+            <!-- TC05: Image Responsiveness -->
+            <div class="col-12 col-md-6">
+                <h2 class="mb-3">Concert Highlights</h2>
+                <p>Capturing the energy of the crowd and the magic of the stage.</p>
+                <img src="https://images.unsplash.com" 
+                     class="img-fluid rounded shadow" alt="Concert Stage">
+            </div>
+
+            <!-- Media Section -->
+            <div class="col-12 col-md-6" id="media">
+                <div class="card media-card p-4">
+                    <h3 class="h5 mb-3">Live Performance (Video)</h3>
+                    <!-- Video Responsiveness using Bootstrap Ratio -->
+                    <div class="ratio ratio-16x9 mb-4">
+                        <iframe src="https://www.youtube.com/embed/zpOULjyy-n8" title="Concert Video" allowfullscreen></iframe>
+                    </div>
+
+                    <h3 class="h5 mb-3">Official Anthem (Audio)</h3>
+                    <!-- TC06: Audio with Utility Classes -->
+                    <div class="bg-light p-3 rounded">
+                        <audio controls class="w-100">
+                            <source src="https://www.w3schools.com" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p class="mb-0">&copy; 2024 Rock-Fest Concerts. Designed with [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/).</p>
+        </div>
+    </footer>
+
+    <!-- TC01: Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net"></script>
+</body>
+</html>
