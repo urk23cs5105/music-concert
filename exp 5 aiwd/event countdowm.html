@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Countdown</title>
+    <style>
+        .countdown-wrapper { text-align: center; font-family: Arial, sans-serif; background: #222; color: #fff; padding: 20px; border-radius: 8px; width: fit-content; margin: 50px auto; }
+        .timer-display { font-size: 2.5rem; letter-spacing: 2px; color: #00ffcc; }
+        .closed-msg { color: #ff4d4d; font-size: 1.5rem; display: none; }
+    </style>
+</head>
+<body>
+    <div class="countdown-wrapper">
+        <h2 id="header">Registration Ends In:</h2>
+        <div id="timer-display" class="timer-display">00:00:00:00</div>
+        <div id="closed-msg" class="closed-msg">Registration Closed</div>
+    </div>
+
+    <script>
+        // Set future date (YYYY-MM-DDTHH:MM:SS)
+        const targetDate = new Date("2025-12-31T23:59:59").getTime();
+
+        const x = setInterval(() => {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            if (diff < 0) { // Check if countdown reached zero
+                clearInterval(x);
+                document.getElementById("timer-display").style.display = "none";
+                document.getElementById("header").style.display = "none";
+                document.getElementById("closed-msg").style.display = "block";
+                return;
+            }
+
+            // Math conversions (TC Requirement)
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            // Update UI dynamically
+            document.getElementById("timer-display").innerHTML =
+                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }, 1000);
+    </script>
+</body>
+</html>
